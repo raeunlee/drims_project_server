@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-
+const cors=require('cors');
+app.use(cors());
 
 app.get("/hi", function(req,res) {
 	res.send("Welcome mini_proj web");
