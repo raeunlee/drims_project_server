@@ -10,6 +10,7 @@ router.post("/",(req,res)=>{
 });
 
 router.get('/',(req,res)=>{
+    console.log(req.body.text);
     res.send('user 화면');
 });
 

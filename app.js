@@ -6,9 +6,11 @@ const axios=require('axios');
 const bodyparser=require('body-parser');
 const user=require('./routes/user');
 const country=require('./routes/country');
+const travel=require('./routes/travel');
 
 app.use('/user',user);
 app.use('/country',country);
+app.use('/travel', travel);
 
 app.use(cors());
 app.use(express.json());
@@ -29,7 +31,7 @@ const db=mysql.createConnection({
 //conect
 db.connect((err)=>{
     if(err){
-        throw err;
+       console.log ("erro");
     }
     console.log('mysql connected');
 })
@@ -70,7 +72,15 @@ app.post('/create', (req,res)=>{
 
 });
 
-
+app.get('/travel', (req,res) => {
+    db.query("SELECT * FROM travel", (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+            })
+})
 
 app.listen('3000',()=>{
     console.log('server start on port 3000');
