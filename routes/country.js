@@ -37,6 +37,7 @@ router.post("/",(req,res)=>{
 });
 
 router.get('/',(req,res)=>{
+
     db.query("SELECT * FROM country",(err,result)=>{
         if(err){
             console.log(err);
@@ -45,6 +46,10 @@ router.get('/',(req,res)=>{
             res.send(result);
         }
     });
+
+    console.log(req.body.text);
+    res.send('user 화면');
+
 });
 
 module.exports=router;
