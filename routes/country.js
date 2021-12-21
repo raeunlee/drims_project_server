@@ -3,15 +3,53 @@ const router=express.Router();
 const cors=require('cors');
 router.use(cors());
 router.use(express.json());
+const mysql=require('mysql');
 
+
+const db=mysql.createConnection({
+    host: "travel-project.clzbzgdwjz4i.ap-northeast-2.rds.amazonaws.com",
+    user: "root",
+    password: "drims2021!",
+    database: "travelbudget"
+  });
+  //conect
+  /*
+  db.connect((err)=>{
+      if(err){
+          throw err;
+      }
+      console.log('mysql connected');
+  })
+*/
 router.post("/",(req,res)=>{
 
-    console.log(req.body.text);
+    db.query('INSERT INTO country (id,travelName,countryName,dateStart,dateEnd,today,expense,currency,category,memo,money) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+['chul0129','Europe',req.body.text,'2021-12-01','2021-12-31','2021-12-02',20,'euro','food','good',480],
+(err,result)=>{
+    if(err){
+        console.log(err);
+    }else{
+        res.send('Values Inserted');
+    }
+    
+}
+);
 });
 
 router.get('/',(req,res)=>{
+
+    db.query("SELECT * FROM country",(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
+
     console.log(req.body.text);
     res.send('user 화면');
+
 });
 
 module.exports=router;

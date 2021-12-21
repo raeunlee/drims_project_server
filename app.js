@@ -8,19 +8,25 @@ const user=require('./routes/user');
 const country=require('./routes/country');
 const travel=require('./routes/travel');
 
+
+
+app.use('/user',user);
+app.use('/country',country);
+app.use('/travel',travel);
+=======
+
 app.use('/user',user);
 app.use('/country',country);
 app.use('/travel', travel);
 
+
 app.use(cors());
 app.use(express.json());
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:false}));
+
 
 
 //create connection
-
 
 const db=mysql.createConnection({
   host: "travel-project.clzbzgdwjz4i.ap-northeast-2.rds.amazonaws.com",
@@ -49,6 +55,8 @@ db.query('INSERT INTO user (id,name,birth,email,password) VALUES(?,?,?,?,?)',
 }
 );
 */
+
+
 
 
 app.post('/create', (req,res)=>{
@@ -81,6 +89,7 @@ app.get('/travel', (req,res) => {
         }
             })
 })
+
 
 app.listen('3000',()=>{
     console.log('server start on port 3000');
