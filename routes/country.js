@@ -23,8 +23,8 @@ const db=mysql.createConnection({
 */
 router.post("/",(req,res)=>{
 
-    db.query('INSERT INTO country (id,travelName,countryName,dateStart,dateEnd,today,expense,currency,category,memo,money) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
-['chul0129','Europe',req.body.text,'2021-12-01','2021-12-31','2021-12-02',20,'euro','food','good',480],
+    db.query('INSERT INTO country (id,travelName,countryName,dateStart,dateEnd) VALUES(?,?,?,?,?)',
+['chul0129','Europe',req.body.text,'2021-12-01','2021-12-31'],
 (err,result)=>{
     if(err){
         console.log(err);
